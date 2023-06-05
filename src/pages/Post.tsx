@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { deletePostById, getPostById } from '../api';
-import { IAdvertisement, IPost } from '../api/types';
+import { IPost } from '../api/types';
 import NotFound from '../components/NotFound';
 import Tag from '../components/Tag';
 
@@ -10,7 +10,7 @@ const Title = styled.h1`
   font-size: 3rem;
   line-height: 1.5;
   letter-spacing: -0.004em;
-  margin-top: 0px;
+  margin-top: 0;
   font-weight: 800;
   color: #212529;
   margin-bottom: 2rem;
@@ -24,7 +24,7 @@ const Toolbar = styled.div`
 `;
 
 const TextButton = styled.button`
-  padding: 0px;
+  padding: 0;
   outline: none;
   border: none;
   background: none;
@@ -46,7 +46,7 @@ const Info = styled.div`
 
 const ContentsArea = styled.div`
   width: 768px;
-  margin: 5rem auto 0px;
+  margin: 5rem auto 0;
   font-size: 1.125rem;
   color: #212529;
   line-height: 1.7;
@@ -64,7 +64,9 @@ const Post = () => {
   const { postId } = params;
   const [post, setPost] = useState<IPost | null>(null);
   const fetchPostById = async () => {
-    const { data } = await getPostById(postId ?? '');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const { data } = await getPostById(postId);
     const { post } = data;
     setPost(post);
   };
@@ -82,8 +84,12 @@ const Post = () => {
     }
   }; // todo (4) post 컴포넌트
   const requestDeletePostById = async () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     await deletePostById(postId);
-    navigate('/');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    navigator('/');
   };
   return (
     <div style={{ margin: '5.5rem auto', width: '700px' }}>

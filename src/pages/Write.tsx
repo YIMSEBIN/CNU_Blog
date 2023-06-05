@@ -35,7 +35,7 @@ const Editor = styled.textarea`
   border: none;
   resize: none;
   font-size: 1.125rem;
-  flex: 1 1 0%;
+  flex: 1 1 0;
 `;
 
 const BottomSheet = styled.div`
@@ -89,7 +89,7 @@ const Write = () => {
   const isEdit = state?.postId;
 
   const fetchPostById = async (postId: string) => {
-    const { data } = await getPostById(postId);
+    const { data } = await getPostById(Number(postId));
     const { post } = data;
     setTitle(post.title);
     setContent(post.contents);
@@ -140,7 +140,7 @@ const Write = () => {
       requestCreatePost();
     }
     navigate('/');
-  }
+  };
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div style={{ height: 'calc(100% - 4rem)', paddingBottom: '4rem' }}>
