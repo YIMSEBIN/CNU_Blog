@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { deletePostById, getPostById } from '../api';
 import { IPost } from '../api/types';
@@ -74,6 +74,8 @@ const Post = () => {
     fetchPostById();
   }, []);
 
+  const navigate = useNavigate();
+
   if (!post) {
     return <NotFound />;
   }
@@ -89,7 +91,7 @@ const Post = () => {
     await deletePostById(postId);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    navigator('/');
+    navigate('/');
   };
   return (
     <div style={{ margin: '5.5rem auto', width: '700px' }}>
